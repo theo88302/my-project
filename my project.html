@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Compassion Link RW388 | Complete Child Sponsorship Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --fg:#1e3a2f;
+  --card:#ffffff;
+  --primary:#1b4d2e;
+  --primary-light:#2a6e42;
+  --primary-fg:#fef7e0;
+  --accent:#e8b83a;
+  --accent-dark:#c49a2a;
+  --muted:#eaf0e8;
+  --muted-fg:#6b7c6b;
+  --border:#dce5dc;
+  --red:#e53935;
+  --blue:#1e88e5;
+  --green:#2e7d32;
+  --radius-sm:0.5rem;
+  --radius-md:0.75rem;
+  --radius-lg:1rem;
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md:0 8px 24px rgba(0,0,0,0.06);
+  --shadow-lg:0 16px 32px rgba(0,0,0,0.08);
+  --shadow-xl:0 20px 40px rgba(0,0,0,0.12);
+  --gold-grad:linear-gradient(135deg,#f0c45a,#e0a82a);
+  --green-grad:linear-gradient(135deg,#1b4d2e,#2a6e42,#3a8a56);
+}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background: radial-gradient(circle at 0% 0%, #f8fbf5 0%, #eef3e9 50%, #e2ece0 100%);
+  background-attachment: fixed;
+  color:var(--fg);
+  min-height:100vh;
+}
+.url-bar{position:fixed; top:0; left:0; right:0; background:#1a1a2e; color:#eee; padding:0.3rem 1.5rem; font-family:monospace; font-size:0.7rem; display:flex; align-items:center; justify-content:space-between; z-index:200; border-bottom:1px solid rgba(232,184,58,0.3);}
+.url-text{background:rgba(255,255,255,0.1); padding:0.2rem 0.8rem; border-radius:2rem;}
+.top-bar{position:fixed; top:28px; left:0; right:0; z-index:101; background:rgba(27,77,46,0.96); backdrop-filter:blur(12px); padding:0.7rem 2rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(232,184,58,0.3);}
+.top-bar-left{display:flex; align-items:center; gap:1rem;}
+.logo-icon{width:44px; height:44px; background:var(--gold-grad); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.2rem; transition:transform 0.2s;}
+.logo-icon:hover{transform:scale(1.05);}
+.top-bar-title{font-family:'Playfair Display',serif; color:white; font-weight:700; font-size:0.9rem;}
+.auth-buttons-top{display:flex; gap:0.6rem;}
+.auth-btn-top{background:rgba(255,255,255,0.12); backdrop-filter:blur(8px); border:none; padding:0.45rem 1.1rem; border-radius:2rem; color:white; font-weight:600; cursor:pointer; font-size:0.75rem; transition:all 0.2s;}
+.auth-btn-top:hover{background:var(--accent); color:var(--accent-fg); transform:translateY(-2px);}
+.navbar{background:rgba(27,77,46,0.98); backdrop-filter:blur(10px); padding:0.7rem 0; position:fixed; top:86px; left:0; right:0; z-index:100; border-bottom:1px solid rgba(232,184,58,0.2);}
+.navbar .container{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.6rem; max-width:1400px; margin:0 auto; padding:0 2rem;}
+.brand{display:flex; align-items:center; gap:0.5rem; font-weight:800; color:var(--primary-fg); font-family:'Playfair Display',serif; font-size:1rem;}
+.nav-links{display:flex; gap:0.3rem; flex-wrap:wrap;}
+.nav-btn{background:transparent; color:white; border:none; padding:0.45rem 1.1rem; border-radius:2rem; cursor:pointer; font-weight:600; font-size:0.75rem; transition:all 0.2s; position:relative;}
+.nav-btn:hover,.nav-btn.active{background:var(--accent); color:var(--accent-fg); transform:translateY(-2px);}
+.nav-btn.active::after{content:''; position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); width:30px; height:3px; background:var(--accent); border-radius:3px;}
+.profile-wrap{position:relative;}
+.profile-btn{background:var(--accent); border:none; width:44px; height:44px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; background-size:cover; transition:transform 0.2s;}
+.profile-btn:hover{transform:scale(1.05);}
+.profile-drop{display:none; position:absolute; right:0; top:52px; background:white; border-radius:var(--radius-lg); padding:1rem; min-width:280px; box-shadow:var(--shadow-lg); z-index:200; animation:fadeIn 0.2s ease;}
+.profile-drop.show{display:block;}
+.panel{display:none; padding-top:7rem; padding-bottom:4rem; animation:fadeUp 0.3s ease;}
+.panel.active{display:block;}
+.container{max-width:1400px; margin:0 auto; padding:0 1.5rem;}
+.section-header{text-align:center; margin-bottom:2rem;}
+.section-header .badge{font-size:0.7rem; text-transform:uppercase; letter-spacing:1.5px; font-weight:700; background:rgba(232,184,58,0.15); padding:0.3rem 0.9rem; border-radius:2rem; display:inline-block; margin-bottom:0.8rem;}
+.section-header h1{font-size:2.2rem; background:var(--gold-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; font-family:'Playfair Display',serif;}
+.card{background:white; border-radius:var(--radius-lg); padding:1.5rem; box-shadow:var(--shadow-md); margin-bottom:1.5rem; border:none; transition:all 0.2s;}
+.card:hover{box-shadow:var(--shadow-lg); transform:translateY(-3px);}
+.auth-card{max-width:650px; margin:2rem auto; background:white; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-xl);}
+.auth-header{background:var(--green-grad); padding:1.8rem; text-align:center; color:white;}
+.auth-header h1{font-size:1.8rem; margin-bottom:0.3rem;}
+.auth-body{padding:1.8rem;}
+.form-group{margin-bottom:1rem;}
+.form-group label{font-weight:600; font-size:0.7rem; text-transform:uppercase; color:var(--primary); display:block; margin-bottom:0.2rem;}
+.form-group input, .form-group select{width:100%; padding:0.8rem; border-radius:var(--radius-md); border:1.5px solid var(--border); transition:0.2s;}
+.form-group input:focus, .form-group select:focus{border-color:var(--accent); outline:none; box-shadow:0 0 0 3px rgba(232,184,58,0.1);}
+.password-wrapper{position:relative;}
+.password-wrapper input{padding-right:2.5rem;}
+.password-toggle{position:absolute; right:0.8rem; top:50%; transform:translateY(-50%); background:transparent; border:none; cursor:pointer; color:var(--muted-fg);}
+.password-toggle:hover{color:var(--accent);}
+.btn-primary{background:var(--primary); color:white; border:none; padding:0.7rem 1.2rem; border-radius:2rem; cursor:pointer; font-weight:600; transition:all 0.2s;}
+.btn-primary:hover{background:#0f3a22; transform:translateY(-2px); box-shadow:0 4px 12px rgba(27,77,46,0.3);}
+.btn-blue{background:var(--blue); color:white; border:none; padding:0.6rem 1.2rem; border-radius:2rem; cursor:pointer; font-weight:600; transition:all 0.2s;}
+.btn-blue:hover{background:#1565c0; transform:translateY(-2px);}
+.btn-accent{background:var(--accent); color:var(--accent-fg); border:none; padding:0.6rem 1.2rem; border-radius:2rem; cursor:pointer; font-weight:600; transition:all 0.2s;}
+.btn-accent:hover{background:var(--accent-dark); transform:translateY(-2px);}
+.btn-sm{padding:0.3rem 0.8rem; font-size:0.7rem;}
+.btn-create{background:var(--green-grad); color:white; border:none; padding:0.8rem; border-radius:2rem; font-weight:700; width:100%; cursor:pointer; transition:all 0.2s;}
+.btn-create:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(27,77,46,0.3);}
+.toast{position:fixed; bottom:1.5rem; right:1.5rem; background:white; border-left:5px solid var(--accent); padding:0.8rem 1.2rem; border-radius:var(--radius-md); z-index:9999; box-shadow:var(--shadow-lg); animation:slideIn 0.3s ease; font-weight:500;}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+footer{background:var(--primary); color:white; text-align:center; padding:1.2rem; margin-top:2rem; border-top:4px solid var(--accent); font-size:0.8rem;}
+.user-info-card{background:linear-gradient(135deg, var(--primary), #2a6e42); color:white; border-radius:var(--radius-lg); padding:1rem 1.5rem; margin-bottom:1.2rem; display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center;}
+.user-info-item{display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.15); padding:0.3rem 0.8rem; border-radius:2rem; font-size:0.75rem;}
+.user-avatar-circle{width:50px; height:50px; border-radius:50%; background-size:cover; background-position:center; background-color:#e0e7e0; display:flex; align-items:center; justify-content:center;}
+.tab-bar{display:flex; gap:0.5rem; border-bottom:2px solid var(--accent); margin-bottom:1rem; padding-bottom:0.5rem; flex-wrap:wrap;}
+.tab-btn{background:transparent; border:none; padding:0.5rem 1rem; border-radius:2rem; font-weight:700; cursor:pointer; transition:0.2s;}
+.tab-btn.active{background:var(--accent); color:var(--accent-fg);}
+textarea.kinyarwanda-textarea{min-height:120px; width:100%; padding:0.8rem; border-radius:var(--radius-md); border:2px solid var(--accent); resize:vertical; font-family:'Inter',monospace;}
+.translation-output{background:#fefcf0; padding:0.8rem; border-radius:var(--radius-md); margin-top:0.5rem; border:1px solid var(--border);}
+.contact-item{display:flex; align-items:center; gap:1rem; padding:0.5rem 0; border-bottom:1px solid var(--border);}
+.contact-icon{width:40px; height:40px; background:var(--green-grad); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white;}
+.message-card{background:white; border-radius:var(--radius-md); padding:1rem; margin-bottom:1rem; border-left:4px solid var(--blue);}
+.message-sender{font-weight:700; color:#1565c0;}
+.message-date{font-size:0.7rem; color:var(--muted-fg);}
+.message-content{background:#f0f8ff; padding:0.8rem; border-radius:var(--radius-md); margin:0.8rem 0;}
+.letter-item{background:#f9f9f9; padding:0.8rem; border-radius:0.8rem; margin-bottom:0.5rem; border-left:3px solid var(--accent); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;}
+.letter-content{flex:1;}
+.letter-actions{display:flex; gap:0.5rem;}
+.edit-icon{cursor:pointer; color:var(--blue); transition:0.2s; font-size:1rem;}
+.delete-icon{cursor:pointer; color:var(--red); transition:0.2s; font-size:1rem;}
+.edit-icon:hover,.delete-icon:hover{transform:scale(1.1);}
+.modal{display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000;}
+.modal-content{background:white; border-radius:var(--radius-lg); padding:1.5rem; max-width:500px; width:90%;}
+.modal-buttons{display:flex; gap:1rem; justify-content:center; margin-top:1rem;}
+.modal-buttons button{padding:0.5rem 1.2rem; border:none; border-radius:2rem; cursor:pointer; font-weight:600;}
+.confirm-delete{background:var(--red); color:white;}
+.cancel-delete{background:var(--muted); color:var(--fg);}
+.confirm-edit{background:var(--blue); color:white;}
+.sponsor-request-card{background:#fff9e6; border-left:4px solid var(--accent); border-radius:var(--radius-md); padding:0.8rem; margin-bottom:0.8rem;}
+.leadership-card{background:#f9f6f0; border-radius:var(--radius-md); padding:1rem; margin-bottom:1rem; border-left:4px solid var(--accent);}
+.stats-numbers{display:flex; justify-content:space-around; text-align:center; margin:1rem 0;}
+.user-table{width:100%; border-collapse:collapse;}
+.user-table th,.user-table td{padding:0.8rem; text-align:left; border-bottom:1px solid var(--border);}
+.user-table th{background:var(--muted); font-weight:600;}
+.search-bar{display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap;}
+.search-bar input{flex:1; padding:0.7rem 1rem; border-radius:2rem; border:1.5px solid var(--border);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+</style>
+</head>
+<body>
+
+<div class="url-bar"><div><i class="fas fa-lock"></i> <span class="url-text">https://compassion-link.rw388.org</span></div><div><i class="fas fa-check-circle"></i> Compassion International Partner</div></div>
+
+<div class="top-bar">
+  <div class="top-bar-left"><div class="logo-icon"><i class="fas fa-hands-helping"></i></div><div class="top-bar-title"><i class="fas fa-heart"></i> Compassion Link RW388</div></div>
+  <div class="auth-buttons-top" id="topAuthButtons">
+    <button class="auth-btn-top" id="topSignInBtn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+    <button class="auth-btn-top" id="topSignUpBtn"><i class="fas fa-user-plus"></i> Sign Up</button>
+  </div>
+</div>
+
+<nav class="navbar">
+<div class="container">
+  <div class="brand"><i class="fas fa-hand-holding-heart"></i> Compassion Link <span style="color:var(--accent);">RW388</span></div>
+  <div class="nav-links">
+    <button class="nav-btn" data-panel="dashboardPanel"><i class="fas fa-home"></i> Dashboard</button>
+    <button class="nav-btn" data-panel="writePanel"><i class="fas fa-pen-fancy"></i> Write Letter</button>
+    <button class="nav-btn" data-panel="replyPanel"><i class="fas fa-reply-all"></i> Reply to Sponsor</button>
+    <button class="nav-btn" data-panel="historyPanel"><i class="fas fa-history"></i> My Letters</button>
+    <button class="nav-btn" data-panel="usersPanel"><i class="fas fa-users"></i> All Users</button>
+    <button class="nav-btn" data-panel="aboutPanel"><i class="fas fa-info-circle"></i> About</button>
+    <button class="nav-btn" data-panel="contactPanel"><i class="fas fa-address-card"></i> Contact</button>
+  </div>
+  <div class="profile-wrap">
+    <button class="profile-btn" id="profileToggle"><i class="fas fa-user"></i></button>
+    <div class="profile-drop" id="profileDrop">
+      <div class="profile-header" style="display:flex; gap:0.8rem; border-bottom:2px solid var(--accent); padding-bottom:0.5rem;">
+        <div class="profile-icon" id="profileAvatarDisplay" style="width:40px; height:40px; background:var(--gold-grad); border-radius:50%; background-size:cover;"><i class="fas fa-child"></i></div>
+        <div><h4 id="profileFullName">Child</h4><p id="profileUsernameTag">@user</p></div>
+      </div>
+      <div style="margin:0.5rem 0;"><div><i class="fas fa-user"></i> <span id="profileDetailName">—</span></div><div><i class="fas fa-qrcode"></i> <span id="profileDetailChildNo">—</span></div></div>
+      <div class="action-buttons" style="display:flex; gap:0.5rem;"><button class="cancel-btn" onclick="closeProfileDropdown()">Cancel</button><button class="logout-confirm" onclick="logout()">Logout</button></div>
+    </div>
+  </div>
+</div>
+</nav>
+
+<!-- AUTH PANEL -->
+<div class="panel active" id="authPanel"><div class="container"><div class="auth-card">
+  <div class="auth-header"><h1>Compassion Link</h1><p>"Let the children come to me" — Mark 10:14</p></div>
+  <div class="auth-body">
+    <div id="loginForm">
+      <div class="form-group"><label>Username or Email</label><input type="text" id="loginIdentifier" placeholder="Enter username or email"></div>
+      <div class="form-group"><label>Mukundwa Name (Sponsor Name)</label><input type="text" id="loginMukundwa" placeholder="Enter your sponsor name"></div>
+      <div class="form-group"><label>Child No (Student ID)</label><input type="text" id="loginChildNo" placeholder="Enter your Child No"></div>
+      <div class="form-group"><label>Password</label><div class="password-wrapper"><input type="password" id="loginPassword" placeholder="Password"><button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)"><i class="far fa-eye-slash"></i></button></div></div>
+      <button class="btn-create" onclick="handleLogin()"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+      <div class="auth-switch" style="text-align:center; margin-top:1rem;">New? <a onclick="showMultiStepSignup()" style="color:var(--accent); font-weight:600; cursor:pointer;">Create Account <i class="fas fa-arrow-right"></i></a></div>
+    </div>
+    <div id="signupMultiStep" style="display:none;">
+      <div id="stepContent"></div>
+    </div>
+  </div>
+</div></div></div>
+
+<div id="appContent" style="display:none">
+
+<!-- DASHBOARD PANEL -->
+<div class="panel" id="dashboardPanel"><div class="container">
+  <div class="section-header"><div class="badge"><i class="fas fa-home"></i> Dashboard</div><h1>Welcome to <span class="gold">Compassion Link</span></h1><p id="welcomeMessage" style="color:var(--muted-fg);">Loading...</p></div>
+  <div class="card"><h3><i class="fas fa-bell"></i> Sponsor Notifications</h3><div id="notificationContent"></div></div>
+  <div class="card"><h3><i class="fas fa-envelope"></i> Quick Actions</h3><div style="display:flex; gap:1rem; flex-wrap:wrap;"><button class="btn-primary" onclick="showPanel('writePanel')"><i class="fas fa-pen-fancy"></i> Write Letter</button><button class="btn-primary" onclick="showPanel('usersPanel')"><i class="fas fa-users"></i> Manage Users</button></div></div>
+</div></div>
+
+<!-- WRITE LETTER PANEL -->
+<div class="panel" id="writePanel"><div class="container">
+  <div class="section-header"><div class="badge"><i class="fas fa-feather-alt"></i> Share Your Heart</div><h1>Write a <span class="gold">Letter</span></h1></div>
+  <div class="user-info-card">
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <div class="user-avatar-circle" id="writeAvatarCircle" style="width:55px; height:55px;"><i class="fas fa-child" style="font-size:1.8rem;"></i></div>
+      <div><strong id="writeUserName">—</strong><br><span id="writeFullName" style="font-size:0.7rem;">—</span></div>
+    </div>
+    <div class="user-info-item"><i class="fas fa-venus-mars"></i> <span id="writeGender">—</span></div>
+    <div class="user-info-item"><i class="fas fa-calendar-alt"></i> <span id="writeAge">—</span> years</div>
+    <div class="user-info-item"><i class="fas fa-id-card"></i> <span id="writeChildNo">—</span></div>
+    <div class="user-info-item"><i class="fas fa-tag"></i> <span id="writeUsername">—</span></div>
+  </div>
+  <div class="card">
+    <h3><i class="fas fa-envelope-open-text"></i> Messages from Your Sponsor</h3>
+    <div id="sponsorRequestsList"></div>
+  </div>
+  <div class="card">
+    <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+      <div style="flex:1;"><label><i class="fas fa-pen-faint"></i> Written by / Écrit par :</label><input type="text" id="writtenByName" placeholder="Your name" style="width:100%; padding:0.7rem; border-radius:var(--radius-md); border:1.5px solid var(--border);"></div>
+      <div style="flex:1;"><label><i class="fas fa-calendar-alt"></i> Letter Date :</label><input type="date" id="letterDate" style="width:100%; padding:0.7rem; border-radius:var(--radius-md); border:1.5px solid var(--border);"></div>
+    </div>
+    <div class="form-group"><label><i class="fas fa-user-friends"></i> To Sponsor :</label><input type="text" id="sponsorNameField" placeholder="Sponsor name" value="Johnson Family"></div>
+    <div class="tab-bar">
+      <button class="tab-btn active" data-writetab="life"><i class="fas fa-book-open"></i> Life Story</button>
+      <button class="tab-btn" data-writetab="gift"><i class="fas fa-gift"></i> Thank You Gift</button>
+    </div>
+    <div id="lifeTab"><textarea id="lifeInput" class="kinyarwanda-textarea" placeholder="Andika inkuru yawe mu Kinyarwanda..."></textarea><button class="btn-blue btn-sm" onclick="translateLetter('life')"><i class="fas fa-language"></i> Translate to English</button><div id="lifeOutput" class="translation-output"></div><button class="btn-primary" style="margin-top:0.8rem; width:100%;" onclick="sendLetter('life','Life Story')"><i class="fas fa-paper-plane"></i> Send Life Story</button></div>
+    <div id="giftTab" style="display:none;"><textarea id="giftInput" class="kinyarwanda-textarea" placeholder="Andika ubutumwa bwo gushimira..."></textarea><button class="btn-blue btn-sm" onclick="translateLetter('gift')">Translate</button><div id="giftOutput" class="translation-output"></div><button class="btn-primary" style="margin-top:0.8rem; width:100%;" onclick="sendLetter('gift','Thank You Gift')">Send Gift Letter</button></div>
+  </div>
+</div></div>
+
+<!-- REPLY TO SPONSOR PANEL -->
+<div class="panel" id="replyPanel"><div class="container">
+  <div class="section-header"><div class="badge"><i class="fas fa-reply-all"></i> Reply</div><h1>Reply to <span class="gold">Your Sponsor</span></h1></div>
+  <div class="card"><h3><i class="fas fa-envelope-open-text"></i> Messages from Your Sponsor</h3><div id="sponsorMessagesList"></div></div>
+</div></div>
+
+<!-- HISTORY PANEL -->
+<div class="panel" id="historyPanel"><div class="container">
+  <div class="section-header"><div class="badge"><i class="fas fa-history"></i> History</div><h1>My <span class="gold">Sent Letters</span></h1><p>Click edit ✏️ to modify or delete 🗑️ to remove your letters</p></div>
+  <div class="card"><div id="sentLettersList"></div></div>
+</div></div>
+
+<!-- USERS PANEL - Search, Delete, Cancel -->
+<div class="panel" id="usersPanel"><div class="container">
+  <div class="section-header"><div class="badge"><i class="fas fa-users"></i> Management</div><h1>All <span class="gold">Registered Users</span></h1><p>Search, edit, or delete user accounts</p></div>
+  <div class="card">
+    <div class="search-bar"><input type="text" id="searchUserInput" placeholder="🔍 Search by name, username, email, or child number..." onkeyup="searchUsers()"><button class="btn-primary" onclick="searchUsers()"><i class="fas fa-search"></i> Search</button><button class="btn-accent" onclick="resetUserSearch()"><i class="fas fa-sync-alt"></i> Reset</button></div>
+    <div style="overflow-x:auto;"><table class="user-table"><thead><tr><th>Avatar</th><th>Full Name</th><th>Mukundwa</th><th>Username</th><th>Email</th><th>Child No</th><th>Sex</th><th>Age</th><th>Actions</th></tr></thead><tbody id="usersTableBody"></tbody></table></div>
+    <p style="margin-top:1rem; font-size:0.7rem; color:var(--muted-fg);"><i class="fas fa-info-circle"></i> Click delete 🗑️ to remove a user (requires confirmation)</p>
+  </div>
+</div></div>
+
+<!-- ABOUT PANEL -->
+<div class="panel" id="aboutPanel"><div class="container">
+  <div class="section-header"><div class="badge"><i class="fas fa-info-circle"></i> About Us</div><h1>Compassion <span class="gold">International</span></h1></div>
+  <div class="card">
+    <h3><i class="fas fa-chart-line"></i> Children Statistics</h3>
+    <div class="stats-numbers"><div><strong>Total Children</strong><br>🎓 365</div><div><strong>Girls</strong><br>👧 123</div><div><strong>Boys</strong><br>👦 242</div></div>
+    <h3><i class="fas fa-graduation-cap"></i> Education Levels</h3>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:0.5rem; margin:1rem 0;">
+      <div style="background:#e8f5e9; padding:0.5rem; border-radius:0.8rem; text-align:center;"><strong>Primary</strong><br>P1-P6</div>
+      <div style="background:#e8f5e9; padding:0.5rem; border-radius:0.8rem; text-align:center;"><strong>Lower Secondary</strong><br>S1-S3</div>
+      <div style="background:#e8f5e9; padding:0.5rem; border-radius:0.8rem; text-align:center;"><strong>Upper Secondary</strong><br>S4-S6</div>
+      <div style="background:#e8f5e9; padding:0.5rem; border-radius:0.8rem; text-align:center;"><strong>Vocational</strong><br>TVET</div>
+    </div>
+    <h3><i class="fas fa-bullseye"></i> Our Aims & Mission</h3>
+    <ul style="margin:1rem 0 1.5rem 1.5rem;"><li>✝️ Release children from poverty in Jesus' name</li><li>🏫 Holistic child development</li><li>⛪ Empower local churches</li><li>📚 Access to education and healthcare</li></ul>
+    <h3><i class="fas fa-users"></i> Leadership Team</h3>
+    <div class="leadership-card"><strong>Director: Habimana</strong><br>📧 habimana@gmail.com<br>📞 0787755341</div>
+    <div class="leadership-card"><strong>Accountable: Uwase Joyce</strong><br>📧 uwasejoyce@gmail.com<br>📞 0790633445</div>
+    <div class="leadership-card"><strong>PCD: Francoise</strong><br>📧 francoise@gmail.com<br>📞 0796099411</div>
+    <div style="background:var(--primary); padding:1rem; border-radius:var(--radius-md); color:white; margin-top:1rem; text-align:center;">compassioninternational218@gmail.com</div>
+  </div>
+</div></div>
+
+<!-- CONTACT PANEL -->
+<div class="panel" id="contactPanel"><div class="container">
+  <div class="section-header"><div class="badge"><i class="fas fa-address-card"></i> Contact Us</div><h1>Get in <span class="gold">Touch</span></h1></div>
+  <div class="card">
+    <h3>Compassion International Rwanda</h3>
+    <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><strong>Email:</strong> compassioninternational388@gmail.com</div></div>
+    <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone-alt"></i></div><div><strong>Phone:</strong> 0787755341 / 0790633445</div></div>
+    <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div>Karambi Sector, Nyamasheke District, Rwanda</div></div>
+  </div>
+  <div class="card">
+    <div class="developer-badge"><i class="fas fa-code"></i> System Developer</div>
+    <h3>Niyonsaba Theogene</h3>
+    <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><strong>Email:</strong> niyonsabat01@gmail.com</div></div>
+    <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone-alt"></i></div><div><strong>Phone:</strong> 0796099411</div></div>
+  </div>
+</div></div>
+
+<footer>© Compassion Link RW388 • <i class="fas fa-language"></i>• <i class="fas fa-heart"></i> Transforming Lives</footer>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal"><div class="modal-content"><h3><i class="fas fa-edit"></i> Edit Your Letter</h3><div class="form-group"><label>Letter Type</label><select id="editType"><option value="Life Story">Life Story</option><option value="Thank You Gift">Thank You Gift</option></select></div><div class="form-group"><label>Written by</label><input type="text" id="editWrittenBy"></div><div class="form-group"><label>To Sponsor</label><input type="text" id="editSponsor"></div><div class="form-group"><label>Date</label><input type="date" id="editDate"></div><div class="modal-buttons"><button class="confirm-edit" onclick="saveEditedLetter()">Save Changes</button><button class="cancel-delete" onclick="closeEditModal()">Cancel</button></div></div></div>
+
+<!-- Delete Letter Modal -->
+<div id="deleteModal" class="modal"><div class="modal-content"><h3><i class="fas fa-trash-alt"></i> Delete Letter</h3><p>Are you sure you want to delete this letter?</p><div class="modal-buttons"><button class="confirm-delete" id="confirmDeleteBtn">Yes, Delete</button><button class="cancel-delete" id="cancelDeleteBtn">Cancel</button></div></div></div>
+
+<!-- Delete User Modal -->
+<div id="deleteUserModal" class="modal"><div class="modal-content"><h3><i class="fas fa-trash-alt"></i> Delete User Account</h3><p>Are you sure you want to permanently delete this user? This action cannot be undone.</p><div class="modal-buttons"><button class="confirm-delete" id="confirmDeleteUserBtn">Yes, Delete User</button><button class="cancel-delete" id="cancelDeleteUserBtn">Cancel</button></div></div></div>
+
+<script>
+// ======================== DATA STORAGE ========================
+let users = JSON.parse(localStorage.getItem("compassion_users")) || [];
+let currentUser = JSON.parse(sessionStorage.getItem("compassion_current_user")) || null;
+let sentLetters = JSON.parse(localStorage.getItem("sent_letters")) || {};
+
+let sponsorRequests = [
+  { id:1, sender:"Johnson Family", message:"Dear child, we would love to hear about your life! Please tell us about your family, school, and dreams. God bless you!", date:"2025-05-01" },
+  { id:2, sender:"Williams Family", message:"We sent you a special birthday gift! Can you write us a thank you letter?", date:"2025-05-02" },
+  { id:3, sender:"Anderson Family", message:"Thank you for your beautiful letter! Please write back to us!", date:"2025-05-03" }
+];
+
+if(!users.some(u => u.username === "demo@compassion.org")){
+    users.push({ id:Date.now(), fullname:"Demo User", mukundwaName:"Johnson Family", username:"demo@compassion.org", email:"demo@compassion.org", password:"demo123", sex:"Male", dob:"2010-01-01", childNo:"RW388-DEMO001", avatar:null });
+    localStorage.setItem("compassion_users", JSON.stringify(users));
+}
+if(!sentLetters[999]) sentLetters[999] = [{ type:"Life Story", sponsor:"Johnson Family", date:"2025-05-01", writtenBy:"Demo User" }];
+localStorage.setItem("sent_letters", JSON.stringify(sentLetters));
+
+function saveUsers(){ localStorage.setItem("compassion_users", JSON.stringify(users)); }
+function saveSentLetters(){ localStorage.setItem("sent_letters", JSON.stringify(sentLetters)); }
+function showToast(msg){ let t=document.createElement("div");t.className="toast";t.innerHTML=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3000); }
+
+// Letter Edit/Delete variables
+let pendingEditIndex = null;
+let pendingDeleteIndex = null;
+let pendingDeleteUserId = null;
+
+function openEditModal(index){
+  pendingEditIndex = index;
+  let letter = sentLetters[currentUser.id][index];
+  document.getElementById("editType").value = letter.type;
+  document.getElementById("editWrittenBy").value = letter.writtenBy;
+  document.getElementById("editSponsor").value = letter.sponsor;
+  document.getElementById("editDate").value = letter.date;
+  document.getElementById("editModal").style.display = "flex";
+}
+function closeEditModal(){ document.getElementById("editModal").style.display = "none"; pendingEditIndex = null; }
+function saveEditedLetter(){
+  if(pendingEditIndex !== null && currentUser && sentLetters[currentUser.id]){
+    sentLetters[currentUser.id][pendingEditIndex] = {
+      type: document.getElementById("editType").value,
+      writtenBy: document.getElementById("editWrittenBy").value,
+      sponsor: document.getElementById("editSponsor").value,
+      date: document.getElementById("editDate").value
+    };
+    saveSentLetters();
+    displaySentLetters();
+    showToast("Letter updated successfully!");
+    closeEditModal();
+  }
+}
+function openDeleteModal(index){ pendingDeleteIndex = index; document.getElementById("deleteModal").style.display = "flex"; }
+function closeDeleteModal(){ document.getElementById("deleteModal").style.display = "none"; pendingDeleteIndex = null; }
+function confirmDeleteLetter(){
+  if(pendingDeleteIndex !== null && currentUser && sentLetters[currentUser.id]){
+    sentLetters[currentUser.id].splice(pendingDeleteIndex, 1);
+    saveSentLetters();
+    displaySentLetters();
+    showToast("Letter deleted successfully");
+  }
+  closeDeleteModal();
+}
+
+// User Management Functions
+function openDeleteUserModal(userId){
+  pendingDeleteUserId = userId;
+  document.getElementById("deleteUserModal").style.display = "flex";
+}
+function closeDeleteUserModal(){
+  document.getElementById("deleteUserModal").style.display = "none";
+  pendingDeleteUserId = null;
+}
+function confirmDeleteUser(){
+  if(pendingDeleteUserId !== null){
+    users = users.filter(u => u.id !== pendingDeleteUserId);
+    saveUsers();
+    loadUsersTable();
+    showToast("User deleted successfully");
+    if(currentUser && currentUser.id === pendingDeleteUserId){
+      logout();
+    }
+  }
+  closeDeleteUserModal();
+}
+
+function loadUsersTable(){
+  const tbody = document.getElementById("usersTableBody");
+  if(!tbody) return;
+  tbody.innerHTML = users.map(u => `<tr><td><div style="width:40px;height:40px;background-size:cover;border-radius:50%;background-image:url('${u.avatar || ''}');background-color:#e0e7e0;display:flex;align-items:center;justify-content:center;">${!u.avatar ? '<i class="fas fa-child"></i>' : ''}</div></td><td>${u.fullname}</td><td>${u.mukundwaName || '-'}</td><td>${u.username}</td><td>${u.email}</td><td>${u.childNo}</td><td>${u.sex || '-'}</td><td>${u.dob ? Math.floor((Date.now()-new Date(u.dob).getTime())/(365.25*24*60*60*1000)) : '-'}</td><td><i class="fas fa-trash-alt delete-icon" onclick="openDeleteUserModal(${u.id})" style="color:var(--red);cursor:pointer;font-size:1.1rem;" title="Delete User"></i></td>`).join('');
+}
+function searchUsers(){
+  let term = document.getElementById("searchUserInput").value.toLowerCase();
+  let filtered = users.filter(u => u.fullname.toLowerCase().includes(term) || u.username.toLowerCase().includes(term) || u.email.toLowerCase().includes(term) || (u.childNo && u.childNo.toLowerCase().includes(term)));
+  document.getElementById("usersTableBody").innerHTML = filtered.map(u => `<tr><td><div style="width:40px;height:40px;background-size:cover;border-radius:50%;background-image:url('${u.avatar || ''}');background-color:#e0e7e0;display:flex;align-items:center;justify-content:center;">${!u.avatar ? '<i class="fas fa-child"></i>' : ''}</div></td><td>${u.fullname}</td><td>${u.mukundwaName || '-'}</td><td>${u.username}</td><td>${u.email}</td><td>${u.childNo}</td><td>${u.sex || '-'}</td><td>${u.dob ? Math.floor((Date.now()-new Date(u.dob).getTime())/(365.25*24*60*60*1000)) : '-'}</td><td><i class="fas fa-trash-alt delete-icon" onclick="openDeleteUserModal(${u.id})" style="color:var(--red);cursor:pointer;" title="Delete User"></i></td>`).join('');
+}
+function resetUserSearch(){
+  document.getElementById("searchUserInput").value = '';
+  loadUsersTable();
+}
+
+document.getElementById("confirmDeleteBtn")?.addEventListener("click", confirmDeleteLetter);
+document.getElementById("cancelDeleteBtn")?.addEventListener("click", closeDeleteModal);
+document.getElementById("confirmDeleteUserBtn")?.addEventListener("click", confirmDeleteUser);
+document.getElementById("cancelDeleteUserBtn")?.addEventListener("click", closeDeleteUserModal);
+
+// ======================== MULTI-STEP SIGNUP ========================
+let signupData = {};
+let step = 1;
+let generatedCode = null;
+let isVerified = false;
+
+function renderStep(){
+  const stepContent = document.getElementById("stepContent");
+  if(!stepContent) return;
+  if(step === 1){
+    stepContent.innerHTML = `<div class="step-indicator" style="display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem;"><div class="step active">1</div><div class="step">2</div><div class="step">3</div><div class="step">4</div></div>
+      <div class="form-group"><label>Full Name *</label><input type="text" id="fullname" placeholder="Enter your full name"></div>
+      <div class="form-group"><label>Sponsor Name (Mukundwa) *</label><input type="text" id="mukundwaName" placeholder="Enter your sponsor name"></div>
+      <div class="form-group"><label>Username *</label><input type="text" id="signupUsername" placeholder="Unique username" onkeyup="checkSignupUsername()"><div id="usernameStatus"></div></div>
+      <div class="form-group"><label>Email *</label><input type="email" id="signupEmail" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Password *</label><div class="password-wrapper"><input type="password" id="signupPassword" placeholder="Min 8 chars"><button type="button" class="password-toggle" onclick="togglePassword('signupPassword', this)"><i class="far fa-eye-slash"></i></button></div></div>
+      <div class="form-group"><label>Confirm Password *</label><div class="password-wrapper"><input type="password" id="confirmPassword" placeholder="Confirm password"><button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', this)"><i class="far fa-eye-slash"></i></button></div></div>
+      <button class="btn-primary" style="width:100%;" onclick="nextStep1()">Next →</button>`;
+  } else if(step === 2){
+    stepContent.innerHTML = `<div class="step-indicator" style="display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem;"><div class="step completed">1</div><div class="step active">2</div><div class="step">3</div><div class="step">4</div></div>
+      <div class="form-group"><label>Sex</label><select id="sex"><option>Male</option><option>Female</option></select></div>
+      <div class="form-group"><label>Date of Birth</label><input type="date" id="dob"></div>
+      <div class="form-group"><label>Child No *</label><input type="text" id="childNo" placeholder="RW388-XXXX"></div>
+      <button class="btn-primary" style="width:100%;" onclick="nextStep2()">Next →</button>
+      <button class="btn-accent btn-sm" onclick="prevStep()" style="margin-top:0.5rem; width:100%;">← Back</button>`;
+  } else if(step === 3){
+    stepContent.innerHTML = `<div class="step-indicator" style="display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem;"><div class="step completed">1</div><div class="step completed">2</div><div class="step active">3</div><div class="step">4</div></div>
+      <div class="form-group"><label>Profile Picture</label><input type="file" id="profilePic" accept="image/*"></div>
+      <div class="avatar-preview" id="avatarPreview" style="width:100px; height:100px; margin:0 auto; border-radius:50%;"></div>
+      <button class="btn-primary" style="width:100%;" onclick="nextStep3()">Next →</button>
+      <button class="btn-accent btn-sm" onclick="prevStep()">← Back</button>`;
+    document.getElementById("profilePic")?.addEventListener("change",function(e){if(e.target.files[0]){const reader=new FileReader();reader.onload=ev=>document.getElementById("avatarPreview").style.backgroundImage=`url(${ev.target.result})`;reader.readAsDataURL(e.target.files[0]);}});
+  } else if(step === 4){
+    stepContent.innerHTML = `<div class="step-indicator" style="display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem;"><div class="step completed">1</div><div class="step completed">2</div><div class="step completed">3</div><div class="step active">4</div></div>
+      <div class="verification-step"><p><i class="fas fa-envelope"></i> Verification Code</p>
+      <div class="verification-code-input" style="display:flex; gap:0.5rem; justify-content:center;"><input type="text" id="verifyCode" placeholder="6-digit code"><button class="btn-blue btn-sm" onclick="sendSignupCode()">Send Code</button><button class="btn-primary btn-sm" onclick="verifySignupCode()">Verify</button></div>
+      <div id="verifyStatus"></div></div>
+      <button class="btn-create" id="finalSignupBtn" style="display:none;" onclick="completeSignup()">Complete Signup ✓</button>
+      <button class="btn-accent btn-sm" onclick="prevStep()">← Back</button>`;
+  }
+}
+function checkSignupUsername(){ const u=document.getElementById("signupUsername")?.value.trim(); if(u?.length>2) document.getElementById("usernameStatus").innerHTML = users.some(u2=>u2.username===u) ? '❌ Taken' : '✅ Available'; }
+function nextStep1(){ let f=document.getElementById("fullname")?.value.trim(), m=document.getElementById("mukundwaName")?.value.trim(), u=document.getElementById("signupUsername")?.value.trim(), e=document.getElementById("signupEmail")?.value.trim(), p=document.getElementById("signupPassword")?.value, c=document.getElementById("confirmPassword")?.value; if(!f||!m||!u||!e||!p) return showToast("Fill all fields"); if(users.some(u2=>u2.username===u)) return showToast("Username taken"); if(users.some(u2=>u2.email===e)) return showToast("Email exists"); if(p!==c) return showToast("Passwords don't match"); if(p.length<8) return showToast("Password min 8 chars"); signupData={...signupData, fullname:f, mukundwaName:m, username:u, email:e, password:p}; step++; renderStep(); }
+function nextStep2(){ let s=document.getElementById("sex")?.value, d=document.getElementById("dob")?.value, c=document.getElementById("childNo")?.value.trim(); if(!c) return showToast("Child No required"); if(users.some(u=>u.childNo===c)) return showToast("Child No exists"); signupData={...signupData, sex:s, dob:d, childNo:c}; step++; renderStep(); }
+function nextStep3(){ step++; renderStep(); }
+function prevStep(){ if(step>1){ step--; renderStep(); } }
+function sendSignupCode(){ let email=signupData.email; if(!email) return showToast("Email not found"); generatedCode=Math.floor(100000+Math.random()*900000).toString(); document.getElementById("verifyStatus").innerHTML=`<span style="color:green;">✓ Code sent to ${email}: ${generatedCode}</span>`; showToast(`📧 Code sent to ${email}`); }
+function verifySignupCode(){ let code=document.getElementById("verifyCode")?.value.trim(); if(code===generatedCode){ isVerified=true; document.getElementById("verifyStatus").innerHTML='<span style="color:green;">✓ Verified!</span>'; document.getElementById("finalSignupBtn").style.display="block"; showToast("Email verified!"); } else { document.getElementById("verifyStatus").innerHTML='<span style="color:red;">✗ Invalid code</span>'; isVerified=false; } }
+function completeSignup(){ if(!isVerified) return showToast("Please verify email first"); let newUser={ id:Date.now(), fullname:signupData.fullname, mukundwaName:signupData.mukundwaName, username:signupData.username, email:signupData.email, password:signupData.password, sex:signupData.sex, dob:signupData.dob, childNo:signupData.childNo, avatar:null }; users.push(newUser); saveUsers(); if(!sentLetters[newUser.id]) sentLetters[newUser.id]=[]; saveSentLetters(); showToast("🎉 Account created! Please login."); document.getElementById("signupMultiStep").style.display="none"; document.getElementById("loginForm").style.display="block"; step=1; signupData={}; isVerified=false; }
+window.showMultiStepSignup = () => { document.getElementById("loginForm").style.display="none"; document.getElementById("signupMultiStep").style.display="block"; renderStep(); };
+function togglePassword(id,btn){ let inp=document.getElementById(id); if(inp.type==="password"){ inp.type="text"; btn.innerHTML='<i class="far fa-eye"></i>'; } else { inp.type="password"; btn.innerHTML='<i class="far fa-eye-slash"></i>'; } }
+
+function handleLogin(){
+  let identifier=document.getElementById("loginIdentifier").value.trim();
+  let mukundwa=document.getElementById("loginMukundwa").value.trim();
+  let childNo=document.getElementById("loginChildNo").value.trim();
+  let pwd=document.getElementById("loginPassword").value;
+  let user=users.find(u=>(u.username===identifier||u.email===identifier) && u.mukundwaName===mukundwa && u.childNo===childNo && u.password===pwd);
+  if(!user){ user=users.find(u=>(u.username===identifier||u.email===identifier) && u.password===pwd); if(!user) return showToast("Invalid credentials"); }
+  currentUser=user;
+  sessionStorage.setItem("compassion_current_user",JSON.stringify(currentUser));
+  document.getElementById("authPanel").classList.remove("active");
+  document.getElementById("appContent").style.display="block";
+  document.getElementById("profileFullName").innerText=currentUser.fullname;
+  document.getElementById("profileUsernameTag").innerHTML=`@${currentUser.username}`;
+  document.getElementById("profileDetailName").innerText=currentUser.fullname;
+  document.getElementById("profileDetailChildNo").innerText=currentUser.childNo;
+  document.getElementById("welcomeMessage").innerHTML=`Welcome to Compassion Link, ${currentUser.fullname.split(' ')[0]}!`;
+  updateUserInfoDisplays();
+  if(currentUser.avatar) document.getElementById("profileAvatarDisplay").style.backgroundImage=`url(${currentUser.avatar})`;
+  showToast(`🎉 Welcome to Compassion Link, ${currentUser.fullname}!`);
+  showPanel('dashboardPanel');
+  displaySponsorRequests();
+  displaySponsorMessages();
+  displaySentLetters();
+  loadUsersTable();
+  showNotificationPanel();
+}
+
+function updateUserInfoDisplays(){
+  if(!currentUser) return;
+  let age = currentUser.dob ? Math.floor((Date.now()-new Date(currentUser.dob).getTime())/(365.25*24*60*60*1000)) : '—';
+  document.getElementById("writeUserName").innerText = currentUser.mukundwaName || currentUser.fullname;
+  document.getElementById("writeGender").innerText = currentUser.sex || '—';
+  document.getElementById("writeAge").innerText = age;
+  document.getElementById("writeChildNo").innerText = currentUser.childNo || 'RW388-';
+  document.getElementById("writeFullName").innerText = currentUser.fullname;
+  document.getElementById("writeUsername").innerText = currentUser.username;
+  document.getElementById("writtenByName").value = currentUser.fullname;
+  document.getElementById("letterDate").valueAsDate = new Date();
+  document.getElementById("sponsorNameField").value = currentUser.mukundwaName || "Johnson Family";
+  if(currentUser.avatar){
+    document.getElementById("writeAvatarCircle").style.backgroundImage = `url(${currentUser.avatar})`;
+    document.getElementById("writeAvatarCircle").style.backgroundSize = "cover";
+    document.getElementById("writeAvatarCircle").innerHTML = "";
+  }
+}
+
+function logout(){ sessionStorage.removeItem("compassion_current_user"); location.reload(); }
+function closeProfileDropdown(){ document.getElementById("profileDrop").classList.remove("show"); }
+document.getElementById("profileToggle")?.addEventListener("click",(e)=>{ e.stopPropagation(); document.getElementById("profileDrop").classList.toggle("show"); });
+document.addEventListener("click",(e)=>{ if(!e.target.closest(".profile-wrap")) document.getElementById("profileDrop")?.classList.remove("show"); });
+document.getElementById("topSignInBtn")?.addEventListener("click",()=>{ document.getElementById("loginForm").style.display="block"; document.getElementById("signupMultiStep").style.display="none"; document.getElementById("authPanel").classList.add("active"); document.getElementById("appContent").style.display="none"; });
+document.getElementById("topSignUpBtn")?.addEventListener("click",()=>{ showMultiStepSignup(); document.getElementById("authPanel").classList.add("active"); document.getElementById("appContent").style.display="none"; });
+
+function showPanel(id){
+  if(!currentUser) return;
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.remove("active");
+    if(btn.getAttribute("data-panel")===id) btn.classList.add("active");
+  });
+  if(id === 'writePanel') displaySponsorRequests();
+  if(id === 'historyPanel') displaySentLetters();
+  if(id === 'replyPanel') displaySponsorMessages();
+  if(id === 'usersPanel') loadUsersTable();
+  if(id === 'dashboardPanel') showNotificationPanel();
+}
+
+function displaySponsorRequests(){
+  let container=document.getElementById("sponsorRequestsList");
+  if(!container) return;
+  let html='';
+  sponsorRequests.forEach(req=>{
+    html+=`<div class="sponsor-request-card"><div class="message-sender"><i class="fas fa-user-circle"></i> ${req.sender}</div><div class="message-date">${req.date}</div><div class="message-content"><strong>📝 Message:</strong><br>${req.message}</div></div>`;
+  });
+  container.innerHTML=html;
+}
+
+function displaySentLetters(){
+  let container=document.getElementById("sentLettersList");
+  if(!container||!currentUser) return;
+  let letters=sentLetters[currentUser.id]||[];
+  if(letters.length===0){ container.innerHTML='<p style="text-align:center;color:var(--muted-fg);">📭 No letters sent yet. Write your first letter!</p>'; return; }
+  container.innerHTML=letters.map((l, idx)=>`<div class="letter-item"><div class="letter-content"><strong>✉️ ${l.type}</strong><br>👤 ${l.writtenBy}<br>📅 ${l.date}<br>🎯 To: ${l.sponsor}</div><div class="letter-actions"><i class="fas fa-edit edit-icon" onclick="openEditModal(${idx})" title="Edit Letter"></i><i class="fas fa-trash-alt delete-icon" onclick="openDeleteModal(${idx})" title="Delete Letter"></i></div></div>`).join('');
+}
+
+// Translation API
+const API_URL="https://jlnrwcucikiohlbcblbt.supabase.co/functions/v1/translate";
+const ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsbnJ3Y3VjaWtpb2hsYmNibGJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODczMzYsImV4cCI6MjA5MDM2MzMzNn0.8l0tAodRv4j3MY5WhayUyU1FYluib_3Ly__fCiZO90E";
+async function callTranslate(text, from, to){ const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":ANON_KEY,"Authorization":"Bearer "+ANON_KEY},body:JSON.stringify({text,from,to})}); if(!res.ok)throw Error(); return (await res.json()).translation; }
+
+window.translateLetter = async function(prefix){
+  let input=document.getElementById(prefix+"Input"), output=document.getElementById(prefix+"Output");
+  if(!input.value.trim()) return showToast("Write in Kinyarwanda first");
+  output.innerHTML='<i class="fas fa-spinner fa-spin"></i> Translating...';
+  try{ let t=await callTranslate(input.value.trim(),"kinyarwanda","english"); output.innerHTML=t.replace(/\n/g,'<br>'); showToast("Translation complete!"); } catch(e){ output.innerHTML="Translation error"; }
+};
+
+window.translateSponsorMessage = async function(msgId){
+  let msg=sponsorRequests.find(m=>m.id===msgId);
+  let outputDiv=document.getElementById(`sponsorTranslation-${msgId}`);
+  outputDiv.innerHTML='<i class="fas fa-spinner fa-spin"></i> Translating English → Kinyarwanda...';
+  try{ let t=await callTranslate(msg.message,"english","kinyarwanda"); outputDiv.innerHTML=t.replace(/\n/g,'<br>'); showToast("Translated to Kinyarwanda!"); } catch(e){ outputDiv.innerHTML="Translation error"; }
+};
+
+window.translateChildReply = async function(msgId){
+  let textarea=document.getElementById(`replyText-${msgId}`);
+  let text=textarea.value.trim();
+  if(!text) return showToast("Write your reply in Kinyarwanda first");
+  let previewDiv=document.getElementById(`replyPreview-${msgId}`);
+  previewDiv.innerHTML='<i class="fas fa-spinner fa-spin"></i> Translating Kinyarwanda → English...';
+  try{ let t=await callTranslate(text,"kinyarwanda","english"); previewDiv.innerHTML=t.replace(/\n/g,'<br>'); showToast("Reply translated to English!"); } catch(e){ previewDiv.innerHTML="Translation error"; }
+};
+
+window.sendReplyToSponsor = async function(msgId){
+  let textarea=document.getElementById(`replyText-${msgId}`);
+  let replyText=textarea.value.trim();
+  if(!replyText) return showToast("Write your reply first");
+  let previewDiv=document.getElementById(`replyPreview-${msgId}`);
+  if(!previewDiv.innerText || previewDiv.innerText.includes("Translating")) return showToast("Please translate your reply first");
+  let msg=sponsorRequests.find(m=>m.id===msgId);
+  showToast(`✅ Reply sent to ${msg.sender}! Thank you.`);
+  textarea.value="";
+  previewDiv.innerHTML="";
+  document.getElementById(`sponsorTranslation-${msgId}`).innerHTML="";
+};
+
+function displaySponsorMessages(){
+  let container=document.getElementById("sponsorMessagesList");
+  if(!container) return;
+  let html='';
+  sponsorRequests.forEach(msg=>{
+    html+=`<div class="message-card"><div class="message-sender"><i class="fas fa-user-circle"></i> ${msg.sender}</div><div class="message-date">${msg.date}</div><div class="message-content"><strong>📝 Message (English):</strong><br>${msg.message}</div><button class="btn-blue btn-sm" onclick="translateSponsorMessage(${msg.id})"><i class="fas fa-language"></i> Translate English → Kinyarwanda</button><div id="sponsorTranslation-${msg.id}" class="translation-output"></div><div style="margin-top:1rem;"><label><strong>Your Reply (Write in Kinyarwanda):</strong></label><textarea id="replyText-${msg.id}" rows="4" class="kinyarwanda-textarea" placeholder="Andika igisubizo cyawe mu Kinyarwanda..."></textarea><button class="btn-accent btn-sm" onclick="translateChildReply(${msg.id})"><i class="fas fa-language"></i> Translate Kinyarwanda → English</button><div id="replyPreview-${msg.id}" class="translation-output"></div><button class="btn-primary" style="margin-top:0.8rem; width:100%;" onclick="sendReplyToSponsor(${msg.id})"><i class="fas fa-paper-plane"></i> Send Reply</button></div></div>`;
+  });
+  container.innerHTML=html;
+}
+
+window.sendLetter = function(prefix, type){
+  let content=document.getElementById(prefix+"Input").value.trim();
+  let writtenBy=document.getElementById("writtenByName").value.trim();
+  let sponsor=document.getElementById("sponsorNameField").value.trim()||"Sponsor";
+  let date=document.getElementById("letterDate").value||new Date().toISOString().slice(0,10);
+  if(!content) return showToast("Write letter first");
+  let output=document.getElementById(prefix+"Output");
+  if(!output.innerText||output.innerText.includes("Translating")) return showToast("Translate first");
+  if(!sentLetters[currentUser.id]) sentLetters[currentUser.id]=[];
+  sentLetters[currentUser.id].push({ type, sponsor, date, writtenBy });
+  saveSentLetters();
+  showToast(`📧 ${type} sent! From ${writtenBy} to ${sponsor} on ${date}`);
+  document.getElementById(prefix+"Input").value="";
+  output.innerHTML="";
+  displaySentLetters();
+};
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    let target=this.getAttribute('data-writetab');
+    document.getElementById('lifeTab').style.display=target==='life'?'block':'none';
+    document.getElementById('giftTab').style.display=target==='gift'?'block':'none';
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+let sponsorNotifications = JSON.parse(localStorage.getItem("sponsor_notifications")) || [];
+if(sponsorNotifications.length===0){
+  sponsorNotifications = [{ id:1, message:"📖 Share your life story with your sponsor!", active:true },{ id:2, message:"🎁 Write a thank you letter for the gift!", active:true },{ id:3, message:"💌 Your sponsor sent you messages! Check them!", active:true }];
+  localStorage.setItem("sponsor_notifications", JSON.stringify(sponsorNotifications));
+}
+function showNotificationPanel(){
+  let container=document.getElementById("notificationContent");
+  if(!container) return;
+  let active=sponsorNotifications.filter(n=>n.active);
+  if(active.length===0){ container.innerHTML='<div class="card" style="background:#e8f5e9;"><i class="fas fa-check-circle"></i> No new notifications</div>'; return; }
+  let html='<div style="display:flex; flex-direction:column; gap:0.5rem;">';
+  active.forEach(n=>{ html+=`<div style="background:#fff9e6; padding:0.8rem; border-radius:0.8rem; border-left:4px solid var(--accent);"><p>${n.message}</p></div>`; });
+  html+='</div>';
+  container.innerHTML=html;
+}
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+  btn.addEventListener("click",function(){
+    if(currentUser) showPanel(this.getAttribute("data-panel"));
+  });
+});
+
+if(currentUser){
+  document.getElementById("authPanel").classList.remove("active");
+  document.getElementById("appContent").style.display="block";
+  updateUserInfoDisplays();
+  showPanel('dashboardPanel');
+  displaySentLetters();
+  displaySponsorMessages();
+  displaySponsorRequests();
+  loadUsersTable();
+  showNotificationPanel();
+}
+</script>
+</body>
+</html>
